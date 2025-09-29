@@ -66,7 +66,7 @@ For learning channels, check out the following [article](https://habr.com/ru/art
 2. Parameters N and M are passed as arguments when launching the program.
 3. The program launches N goroutines, each of which sleeps (`time.Sleep`) for a random duration of up to M milliseconds.
 4. The program waits for all goroutines to finish.
-5. The program prints a list to the console consisting of pairs `<goroutine number, sleep time>`, sorted in descending order.
+5. The program prints a list to the console consisting of pairs `<goroutine number, sleep time>`, sorted in descending order of sleep time.
 6. The goroutine number is the iteration index of the loop in which the goroutine was launched.
 7. The sleep time is the number of milliseconds the goroutine slept.
 
