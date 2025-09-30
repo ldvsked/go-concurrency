@@ -96,7 +96,7 @@ The generator and squaring functions must operate concurrently.
 
 1. The program reads the parameter `K` from the command-line arguments.
 2. The parameter `K` is passed through the arguments when launching the program.
-3. `K` defines the ticker interval in seconds and must be of type Int.
+3. `K` defines the ticker interval in seconds and must be of type `uint`.
 4. The program prints to stdout the message Tick `<i>` since `<time>`, where `<i>` is the tick number and `<time>` is the time in seconds since the ticker started.
 5. The program runs until the user sends a SIGTERM or SIGINT signal.
 6. Upon receiving one of these signals, the program stops the ticker and prints the message Termination.
