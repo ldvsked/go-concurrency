@@ -62,13 +62,14 @@ For learning channels, check out the following [article](https://habr.com/ru/art
 
 ### Task 1. Stopwatch for Asynchronous Tasks
 
-1. The program reads two launch arguments: N and M.
-2. Parameters N and M are passed as arguments when launching the program.
-3. The program launches N goroutines, each of which sleeps (`time.Sleep`) for a random duration of up to M milliseconds.
-4. The program waits for all goroutines to finish.
-5. The program prints a list to the console consisting of pairs `<goroutine number, sleep time>`, sorted in descending order of sleep time.
-6. The goroutine number is the iteration index of the loop in which the goroutine was launched.
-7. The sleep time is the number of milliseconds the goroutine slept.
+1. The program reads two launch arguments: `N` and `M`.
+1. The parameters `N` and `M` are of type `int`.
+1. Parameters `N` and `M` are passed as arguments when launching the program.
+1. The program launches `N` goroutines, each of which sleeps (`time.Sleep`) for a random duration of up to `M` milliseconds.
+1. The program waits for all goroutines to finish.
+1. The program prints a list to the console consisting of pairs `<goroutine number, sleep time>`, sorted in descending order of sleep time.
+1. The goroutine number is the iteration index of the loop in which the goroutine was launched.
+1. The sleep time is the number of milliseconds the goroutine slept.
 
 **The use of channels is not allowed.**
 
@@ -79,7 +80,7 @@ For learning channels, check out the following [article](https://habr.com/ru/art
 1. The program reads two arguments from the command line: `K` and `N`.
 2. The parameters `K` and `N` are passed via command-line arguments.
 3. The program launches two functions: a generator and a squaring function.
-4. The parameters `N` and `M` are of type `int`.
+4. The parameters `K` and `N` are of type `int`.
 5. The generator function starts a goroutine and returns channel 1. Inside the goroutine, numbers from `K` to `N` (inclusive) are generated and sent into channel 1.
 6. The squaring function starts a goroutine and returns channel 2. Inside the goroutine, numbers are read from channel 1, squared, and the result is sent to channel 2.
 7. The main program (`main`) reads numbers from channel 2 and prints them to the console.
