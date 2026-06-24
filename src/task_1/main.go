@@ -46,10 +46,10 @@ func main() {
 		go func(id int){
 			timeSleep := time.Duration(rand.IntN(M))  // сколько наносек, мало
 			time.Sleep(timeSleep * time.Millisecond) // сколько наносек в миллисек
-			mu.Lock() // если уже заблокирован, то засыпает и в очередь
+			mu.Lock() // блокирует остальным участникам, если уже заблокирован, то засыпает и в очередь
 			result = append(result, fmt.Sprintf("%d, %d", id, timeSleep))
 			mu.Unlock()
-			wg.Done() // вычесть 
+			wg.Done() // вычесть 1
 		}(i)
 	}
 	
@@ -70,3 +70,4 @@ func main() {
 		fmt.Println(result[i])
 	}
 }
+
