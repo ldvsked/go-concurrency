@@ -1,10 +1,15 @@
 package main 
 
+import (
+	"sync"
+)
+
 type Cache[T comparable] struct {
 	itemsMap map[T]*node[T]
 	cap uint
 	root *node[T]
 	tail *node[T]
+	mutex sync.Mutex
 }
 
 func NewCache[T comparable](cap uint) *Cache[T] {
@@ -67,14 +72,14 @@ func (c *Cache[T])Set(key T){
 	if c.cap == 0 {
 		return
 	}
-
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
 	if val, ok := c.itemsMap[key]; ok  {
 		if val == c.root {
 			return 
 		}
 		remove(val, c)
 		addToFront(val, c)
-
 	} else if len(c.itemsMap) < int(c.cap){
 		var new *node[T] = newNode(key)
 		addToFront(new, c)
@@ -86,5 +91,23 @@ func (c *Cache[T])Set(key T){
 }
 
 func (c *Cache[T])Get(key T) (T, bool) {
-	
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
+	if val, ok := c.itemsMap[key]; ok {
+		if val != c.root {
+			remove(val, c)
+			addToFront(val, c)
+		}
+		return val.value, true
+	} 
+	var zero T 
+	return zero, false
+}
+
+func (c *Cache[T])Clear() {
+	c.mutex.Lock()
+	c.root = nil
+	c.tail = nil 
+	c.itemsMap = make(map[T]*node[T], c.cap)
+	c.mutex.Unlock()
 }
